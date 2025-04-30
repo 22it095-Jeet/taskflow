@@ -28,10 +28,6 @@ class VoiceService {
         listenMode: ListenMode.confirmation,
         cancelOnError: true,
         partialResults: false,
-        onError: (error) {
-          onError();
-          _isListening = false;
-        },
       );
     }
     return false;

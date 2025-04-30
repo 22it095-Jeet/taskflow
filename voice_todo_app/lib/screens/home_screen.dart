@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/task_provider.dart';
 import '../services/voice_service.dart';
+import 'package:hive/hive.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -43,6 +44,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         },
       );
     }
+  }
+
+  void _showHiveBox(BuildContext context) {
+    final box = Hive.box('tasks');
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Hive Box Contents'),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: box.values.map((e) => Text(e.toString())).toList(),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -154,6 +171,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                   ),
                 ),
+              ),
+              ElevatedButton(
+                onPressed: () => _showHiveBox(context),
+                child: Text('Show Hive Box'),
               ),
             ],
           ),

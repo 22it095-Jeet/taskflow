@@ -40,9 +40,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// await _speechToText.listen(
-//   onResult: (result) {
-//     print(result.recognizedWords);
-//   },
-// );
